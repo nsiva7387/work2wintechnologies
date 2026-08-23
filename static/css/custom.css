@@ -1,0 +1,24 @@
+/* Work2Win brand and leadership additions */
+.brand-logo { display:flex; align-items:center; gap:.55rem; letter-spacing:-.03em; }
+.brand-logo img { display:block; width:46px; height:46px; object-fit:cover; border-radius:50%; border:1px solid #dce4ea; }
+.brand-logo > span { background:none; color:inherit; padding:0; margin:0; font-size:1rem; letter-spacing:inherit; }
+.brand-logo em { display:none; }
+.ceo { background:#f3f5f5; }
+.ceo-grid { display:grid; grid-template-columns:.78fr 1.05fr; align-items:center; gap:5rem; max-width:940px; }
+.ceo-photo-wrap { max-width:300px; }
+.ceo-photo { width:100%; height:360px; object-fit:cover; object-position:center top; border:4px solid #fff; border-radius:12px; display:block; box-shadow:0 14px 30px #0c425022; }
+.ceo-copy h2 { font-size:clamp(2.1rem,4vw,3.6rem); margin:.2rem 0 .45rem; }
+.ceo-copy > p:not(.eyebrow) { color:var(--muted); font-size:.98rem; }
+.ceo-role { font-weight:700!important; color:var(--teal)!important; margin-top:0; }
+.contact-note { margin-top:1.5rem; font-size:.88rem!important; }
+.enquiry-form { display:none; }
+.contact-grid { grid-template-columns:1fr; max-width:680px; }
+.contact-note { display:none; }
+.enquiry-form .field:has(#email) { display:none; }
+.enquiry-form .form-row:has(#email) { display:block; }
+.whatsapp { display:flex; align-items:center; gap:.4rem; }
+.whatsapp img { width:22px; height:22px; display:block; }
+.whatsapp:first-letter { font-size:inherit; }
+.footer .brand-logo > span { color:#fff; }
+@media (max-width:800px) { .ceo-grid { grid-template-columns:1fr; gap:2.5rem; } .ceo-photo-wrap { max-width:280px; } .ceo-photo { height:340px; } }
+@media (max-width:520px) { .brand-logo > span { font-size:.85rem; } .brand-logo img { width:39px; height:39px; } .ceo-photo { height:330px; } .ceo-copy h2 { font-size:2.35rem; } }
