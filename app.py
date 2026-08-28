@@ -6,6 +6,7 @@ import logging
 import os
 import re
 import sqlite3
+from hmac import compare_digest
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
@@ -211,7 +212,9 @@ def create_app(test_config: dict[str, Any] | None = None) -> Flask:
     def admin() -> Any:
         action = request.form.get("action")
         if action == "login":
-            if request.form.get("password") == app.config["ADMIN_PASSWORD"]:
+            submitted_password = request.form.get("password", "")
+            configured_password = app.config["ADMIN_PASSWORD"]
+            if compare_digest(submitted_password, configured_password):
                 session["admin_logged_in"] = True
                 return redirect(url_for("admin"))
             return render_template("admin.html", logged_in=False, error="Incorrect password."), 401

@@ -39,3 +39,12 @@ def test_email_failure_does_not_lose_enquiry(monkeypatch):
     assert response.status_code == 201
     assert stored
     assert b"still be in touch" in response.data
+
+
+def test_admin_login_uses_configured_password():
+    app = app_module.create_app({"TESTING": True, "ADMIN_PASSWORD": "deployment-secret"})
+    client = app.test_client()
+    rejected = client.post("/admin", data={"action": "login", "password": "wrong"})
+    accepted = client.post("/admin", data={"action": "login", "password": "deployment-secret"})
+    assert rejected.status_code == 401
+    assert accepted.status_code == 302

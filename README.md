@@ -39,6 +39,8 @@ Without `DATABASE_URL`, the application uses a local `work2win.db` SQLite file f
 | --- | --- |
 | `DATABASE_URL` | Supabase/PostgreSQL connection string; never commit it. |
 | `ADMIN_EMAIL` | Notification recipient, normally `work2wintechnologies@gmail.com`. |
+| `ADMIN_PASSWORD` | Required password for the `/admin` dashboard. Set it as a secret in Render. |
+| `SECRET_KEY` | Flask session-signing secret. Render generates one from `render.yaml`. |
 | `RESEND_API_KEY` | Resend API key; optional locally. |
 | `FROM_EMAIL` | A verified Resend sender, such as `Work2Win <updates@your-domain>`. |
 
@@ -50,7 +52,7 @@ Email is intentionally best-effort. An enquiry is stored first; an email outage 
 2. Run `database/schema.sql`, then copy the project PostgreSQL connection string to `DATABASE_URL`.
 3. Push this project to a new GitHub repository. Keep `.env` local only.
 4. In Render, create a Blueprint from the repository (the included `render.yaml` supplies the build and start commands).
-5. Enter `DATABASE_URL`, `RESEND_API_KEY` and `FROM_EMAIL` in Render’s secret environment-variable settings. Confirm `ADMIN_EMAIL`.
+5. Enter `DATABASE_URL`, `ADMIN_PASSWORD`, `RESEND_API_KEY` and `FROM_EMAIL` in Render’s secret environment-variable settings. Confirm `ADMIN_EMAIL`. `ADMIN_PASSWORD` is not copied from your local `.env` file.
 6. Deploy and submit a test enquiry. Verify the database row and, if configured, the notification email.
 
 Supabase is the permanent datastore; Render’s free PostgreSQL offering is not used. Render supplies HTTPS for the public service. The application is not claimed as deployed until those manual account steps and the live verification are complete.
