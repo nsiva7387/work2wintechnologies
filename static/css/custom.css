@@ -168,6 +168,8 @@
 .review-card video { height:460px; max-height:none; aspect-ratio:auto; object-fit:contain; }
 .latest-feedback-float { position:fixed; left:1.25rem; top:5.5rem; z-index:7; width:min(240px, calc(100vw - 32px)); overflow:hidden; border:1px solid var(--line); border-radius:12px; background:#fff; box-shadow:0 16px 36px #1422383d; }
 .latest-feedback-float > p { margin:0; padding:.65rem 2.4rem .65rem .9rem; background:#f3f5f5; color:var(--teal); font-size:.75rem; font-weight:800; text-transform:uppercase; letter-spacing:.05em; }
+.feedback-float-drag-handle { cursor:grab; user-select:none; touch-action:none; }
+.feedback-float-drag-handle:active { cursor:grabbing; }
 .latest-feedback-float video { display:block; width:100%; height:270px; object-fit:contain; background:#142238; }
 .latest-feedback-float > div { display:grid; gap:.2rem; padding:.7rem .9rem .85rem; }
 .latest-feedback-float span { color:var(--muted); font-size:.82rem; }

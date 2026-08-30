@@ -49,6 +49,46 @@ document.querySelector('#year').textContent = new Date().getFullYear();
 document.querySelector('.feedback-float-close')?.addEventListener('click', () => {
   document.querySelector('.latest-feedback-float')?.remove();
 });
+
+const feedbackFloat = document.querySelector('.latest-feedback-float');
+const feedbackDragHandle = document.querySelector('.feedback-float-drag-handle');
+if (feedbackFloat && feedbackDragHandle) {
+  const positionKey = 'work2win-feedback-video-position';
+  const padding = 12;
+  const moveTo = (left, top) => {
+    const maxLeft = Math.max(padding, window.innerWidth - feedbackFloat.offsetWidth - padding);
+    const maxTop = Math.max(padding, window.innerHeight - feedbackFloat.offsetHeight - padding);
+    feedbackFloat.style.left = `${Math.min(Math.max(padding, left), maxLeft)}px`;
+    feedbackFloat.style.top = `${Math.min(Math.max(padding, top), maxTop)}px`;
+  };
+
+  try {
+    const savedPosition = JSON.parse(localStorage.getItem(positionKey));
+    if (savedPosition && Number.isFinite(savedPosition.left) && Number.isFinite(savedPosition.top)) moveTo(savedPosition.left, savedPosition.top);
+  } catch (_) { /* Ignore an unavailable or invalid saved position. */ }
+
+  feedbackDragHandle.addEventListener('pointerdown', (event) => {
+    event.preventDefault();
+    const bounds = feedbackFloat.getBoundingClientRect();
+    const offsetX = event.clientX - bounds.left;
+    const offsetY = event.clientY - bounds.top;
+    feedbackDragHandle.setPointerCapture(event.pointerId);
+    const drag = (moveEvent) => moveTo(moveEvent.clientX - offsetX, moveEvent.clientY - offsetY);
+    const stopDrag = () => {
+      feedbackDragHandle.removeEventListener('pointermove', drag);
+      const boundsAfterDrag = feedbackFloat.getBoundingClientRect();
+      localStorage.setItem(positionKey, JSON.stringify({ left: boundsAfterDrag.left, top: boundsAfterDrag.top }));
+    };
+    feedbackDragHandle.addEventListener('pointermove', drag);
+    feedbackDragHandle.addEventListener('pointerup', stopDrag, { once: true });
+    feedbackDragHandle.addEventListener('pointercancel', stopDrag, { once: true });
+  });
+
+  window.addEventListener('resize', () => {
+    const bounds = feedbackFloat.getBoundingClientRect();
+    moveTo(bounds.left, bounds.top);
+  });
+}
 const contactCopy = document.querySelector('.contact-copy');
 if (contactCopy) {
   const emailLink = document.createElement('a');
