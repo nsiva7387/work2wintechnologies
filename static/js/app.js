@@ -34,9 +34,21 @@ document.querySelector('.menu-button').addEventListener('click', (event) => {
   event.currentTarget.setAttribute('aria-expanded', String(!open));
   document.querySelector('#nav-links').classList.toggle('is-open', !open);
 });
-document.querySelectorAll('.nav-links a').forEach((link) => link.addEventListener('click', () => document.querySelector('#nav-links').classList.remove('is-open')));
-document.querySelectorAll('[data-course]').forEach((link) => link.addEventListener('click', () => { document.querySelector('#course').value = link.dataset.course; }));
+document.querySelectorAll('.nav-links a').forEach((link) => link.addEventListener('click', () => {
+  document.querySelector('#nav-links').classList.remove('is-open');
+  document.querySelector('.menu-button').setAttribute('aria-expanded', 'false');
+}));
+document.querySelectorAll('[data-course]').forEach((link) => {
+  link.setAttribute('href', '#registration');
+  link.addEventListener('click', () => {
+    const courseSelect = document.querySelector('#registration-course');
+    if (courseSelect) courseSelect.value = link.dataset.course;
+  });
+});
 document.querySelector('#year').textContent = new Date().getFullYear();
+document.querySelector('.feedback-float-close')?.addEventListener('click', () => {
+  document.querySelector('.latest-feedback-float')?.remove();
+});
 const contactCopy = document.querySelector('.contact-copy');
 if (contactCopy) {
   const emailLink = document.createElement('a');
@@ -55,6 +67,46 @@ function validate(data) {
   if (data.message.length > 1000) errors.message = 'Message must be 1,000 characters or fewer.';
   return errors;
 }
+
+const publicRegistrationForm = document.querySelector('#registration-form');
+if (publicRegistrationForm) {
+  publicRegistrationForm.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    const status = publicRegistrationForm.querySelector('.form-status');
+    const data = Object.fromEntries(new FormData(publicRegistrationForm));
+    const errors = {};
+    if (data.name.trim().length < 2) errors.name = 'Enter your full name.';
+    if (!phonePattern.test(data.phone.trim())) errors.phone = 'Enter a valid mobile number.';
+    if (data.whatsapp && !phonePattern.test(data.whatsapp.trim())) errors.whatsapp = 'Enter a valid WhatsApp number.';
+    if (data.email && !/^\S+@\S+\.\S+$/.test(data.email)) errors.email = 'Enter a valid email address.';
+    if (!data.course) errors.course = 'Please select a course.';
+    ['name', 'phone', 'whatsapp', 'email', 'course', 'message'].forEach((key) => {
+      const field = publicRegistrationForm.elements[key];
+      const message = errors[key] || '';
+      field.setAttribute('aria-invalid', Boolean(message));
+      field.closest('.field').querySelector('small').textContent = message;
+    });
+    if (Object.keys(errors).length) return;
+    const button = publicRegistrationForm.querySelector('button');
+    button.disabled = true;
+    status.className = 'form-status';
+    status.textContent = 'Submitting your registration…';
+    try {
+      const response = await fetch('/api/course-registration/', {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(data)});
+      const result = await response.json();
+      if (!response.ok) throw new Error(result.message || 'Unable to submit your registration.');
+      status.className = 'form-status success';
+      status.textContent = result.message;
+      publicRegistrationForm.reset();
+    } catch (error) {
+      status.className = 'form-status error';
+      status.textContent = error.message || 'Unable to submit your registration. Please try again.';
+    } finally {
+      button.disabled = false;
+    }
+  });
+}
+
 form.addEventListener('submit', async (event) => {
   event.preventDefault(); statusMessage.textContent = '';
   const data = Object.fromEntries(new FormData(form)); const errors = validate(data);

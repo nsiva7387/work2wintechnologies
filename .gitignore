@@ -6,3 +6,5 @@ __pycache__/
 *.db
 data/
 static/uploads/
+media/
+staticfiles/

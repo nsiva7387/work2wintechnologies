@@ -3,17 +3,7 @@ services:
     name: work2win-technologies
     runtime: python
     buildCommand: pip install -r requirements.txt
-    startCommand: gunicorn --bind 0.0.0.0:$PORT app:app
+    startCommand: python manage.py migrate && gunicorn --bind 0.0.0.0:$PORT work2win.wsgi:application
     envVars:
-      - key: DATABASE_URL
-        sync: false
-      - key: ADMIN_EMAIL
-        value: work2wintechnologies@gmail.com
-      - key: ADMIN_PASSWORD
-        sync: false
       - key: SECRET_KEY
         generateValue: true
-      - key: RESEND_API_KEY
-        sync: false
-      - key: FROM_EMAIL
-        sync: false

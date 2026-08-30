@@ -52,3 +52,146 @@
 @media (max-width:800px) { .ceo-grid { grid-template-columns:1fr; gap:2.5rem; } .ceo-photo-wrap { max-width:280px; } .ceo-photo { height:340px; } .announcement-card,.registration-panel { grid-template-columns:1fr; gap:1.5rem; } .announcement-card > img { max-width:420px; } }
 @media (max-width:800px) { .review-grid { grid-template-columns:repeat(2,1fr); } }
 @media (max-width:520px) { .brand-logo > span { font-size:.85rem; } .brand-logo img { width:39px; height:39px; } .ceo-photo { height:330px; } .ceo-copy h2 { font-size:2.35rem; } .quick-contact { gap:.55rem; } .contact-float { width:48px; height:48px; min-height:48px; justify-content:center; padding:.7rem; } .contact-float span { display:none; } }
+
+/* Keep every navigation item inside the header at all screen widths. */
+.nav { position:relative; }
+.nav-links { gap:clamp(.55rem, 1.25vw, 1.35rem); font-size:clamp(.76rem, 1vw, .91rem); }
+.nav-links a { white-space:nowrap; }
+
+@media (max-width:1050px) {
+  .menu-button { display:inline-flex; align-items:center; justify-content:center; min-height:42px; font-weight:700; }
+  .nav-links {
+    display:none;
+    position:absolute;
+    top:calc(100% + 1px);
+    left:0;
+    right:0;
+    max-height:calc(100vh - 77px);
+    overflow-y:auto;
+    padding:1rem max(20px, calc((100vw - 1140px) / 2)) 1.5rem;
+    background:#fffdf9;
+    border-bottom:1px solid var(--line);
+    box-shadow:0 12px 18px #14223814;
+    flex-direction:column;
+    align-items:stretch;
+    gap:.25rem;
+  }
+  .nav-links.is-open { display:flex; }
+  .nav-links a { padding:.75rem .25rem; }
+  .nav-links .nav-cta { margin-top:.35rem; padding:.75rem 1rem; text-align:center; }
+}
+
+@media (max-width:420px) {
+  .nav { min-height:68px; gap:.5rem; }
+  .brand-logo { min-width:0; }
+  .brand-logo > span { overflow:hidden; text-overflow:ellipsis; }
+  .menu-button { flex:0 0 auto; }
+  .nav-links { max-height:calc(100vh - 69px); }
+}
+
+/* Refined, single-action navigation. */
+.container { width:min(1320px, calc(100% - 48px)); }
+.site-header { background:rgba(255,253,249,.96); }
+.nav { min-height:72px; }
+.brand-logo { font-size:1rem; }
+.brand-logo img { width:42px; height:42px; border:0; }
+.nav-links { gap:.2rem; font-size:.86rem; font-weight:600; }
+.nav-links > a:not(.nav-portal) { padding:.55rem .7rem; border-radius:6px; }
+.nav-links > a:not(.nav-portal):hover { background:#edf5f6; color:var(--teal); }
+.nav-portal { display:inline-flex; align-items:center; gap:.45rem; margin-left:.5rem; padding:.65rem .95rem; border-radius:7px; background:var(--teal); color:#fff; text-decoration:none; box-shadow:0 3px 0 #006462; }
+.nav-portal:hover { background:#006b6a; transform:translateY(-1px); }
+.nav-portal span { font-size:1.05rem; line-height:1; }
+
+@media (max-width:1050px) {
+  .nav { min-height:72px; }
+  .nav-links { top:calc(100% + 1px); }
+  .nav-links > a:not(.nav-portal) { padding:.8rem .25rem; }
+  .nav-portal { justify-content:center; margin:.6rem 0 0; padding:.8rem 1rem; }
+}
+
+@media (max-width:420px) {
+  .brand-logo img { width:37px; height:37px; }
+  .brand-logo > span { font-size:.8rem; }
+}
+
+/* Public registration form */
+.registration { background:#102238; }
+.registration-panel { display:grid; grid-template-columns:.8fr 1.2fr; gap:3.5rem; max-width:1000px; margin:auto; align-items:center; color:#fff; }
+.registration-panel .eyebrow { color:#8bded7; }
+.registration-panel h2 { font-size:clamp(2.2rem,4vw,3.6rem); margin:.2rem 0 1rem; }
+.registration-panel > div > p:not(.eyebrow) { color:#cbd6e1; max-width:420px; }
+.registration-points { margin:1.5rem 0 0; padding:0; list-style:none; color:#e6edf3; }
+.registration-points li { position:relative; padding:.45rem 0 .45rem 1.4rem; }
+.registration-points li::before { content:'✓'; position:absolute; left:0; color:#8bded7; font-weight:700; }
+.registration-panel form { padding:1.7rem; border-radius:14px; background:#fff; color:var(--ink); box-shadow:0 16px 34px #0000002e; }
+.registration-panel .form-status { margin-bottom:0; }
+
+@media (max-width:800px) {
+  .container { width:min(100% - 36px, 1320px); }
+  .registration-panel { grid-template-columns:1fr; gap:2rem; }
+}
+
+@media (max-width:520px) {
+  .container { width:calc(100% - 30px); }
+  .registration-panel form { padding:1.15rem; }
+}
+
+/* Announcement pages and registration call to action */
+.announcement-intro { max-width:560px; color:var(--muted); margin-top:-1.4rem; }
+.all-posts { max-width:980px; }
+.announcement-details { margin:1rem 0 1.15rem; }
+.announcement-details summary { display:inline-flex; align-items:center; gap:.45rem; cursor:pointer; color:var(--teal); font-weight:800; }
+.announcement-details summary:hover { color:#005f5e; }
+.announcement-details > div { padding:.9rem 0 .1rem; color:var(--muted); }
+.all-reviews { grid-template-columns:repeat(auto-fit, minmax(260px, 1fr)); }
+.review-course { color:var(--teal)!important; font-weight:800!important; text-transform:uppercase; letter-spacing:.06em; font-size:.72rem!important; }
+.review-register-link { display:inline-block; margin-top:1rem; color:var(--teal); font-size:.86rem; font-weight:800; text-decoration:none; }
+.review-register-link:hover { text-decoration:underline; }
+.post-pagination { display:flex; align-items:center; justify-content:space-between; gap:1rem; margin:2rem auto 0; max-width:900px; padding:1rem 0; font-weight:700; font-size:.9rem; }
+.post-pagination a { color:var(--teal); text-decoration:none; }
+.post-pagination a:hover { text-decoration:underline; }
+.post-detail { background:#f3f5f5; min-height:calc(100vh - 73px); }
+.post-detail-inner { width:min(820px, calc(100% - 40px)); margin:auto; padding:1rem 0 3rem; }
+.back-link { display:inline-block; margin-bottom:2.5rem; color:var(--teal); font-weight:700; text-decoration:none; }
+.post-detail h1 { font-size:clamp(2.3rem,5vw,4.5rem); margin:.2rem 0 2rem; }
+.post-detail img { width:100%; max-height:560px; object-fit:cover; border-radius:14px; margin-bottom:2rem; }
+.post-message { color:var(--muted); font-size:1.05rem; margin:0 0 2rem; }
+.registration-float { position:fixed; left:1.25rem; bottom:1.25rem; z-index:6; display:inline-flex; align-items:center; gap:.5rem; padding:.8rem 1rem; border-radius:99px; background:var(--orange); color:#142238; box-shadow:0 7px 20px #54200a35; text-decoration:none; font-size:.86rem; font-weight:800; }
+.registration-float:hover { transform:translateY(-2px); }
+
+@media (max-width:600px) {
+  .post-pagination { align-items:flex-start; flex-direction:column; }
+  .registration-float { left:1rem; bottom:1rem; padding:.7rem .9rem; }
+}
+
+/* Taller players that preserve the entire uploaded video frame. */
+.review-card video { height:460px; max-height:none; aspect-ratio:auto; object-fit:contain; }
+.latest-feedback-float { position:fixed; right:1.25rem; bottom:11.5rem; z-index:7; width:min(330px, calc(100vw - 32px)); overflow:hidden; border:1px solid var(--line); border-radius:14px; background:#fff; box-shadow:0 16px 36px #1422383d; }
+.latest-feedback-float > p { margin:0; padding:.65rem 2.4rem .65rem .9rem; background:#f3f5f5; color:var(--teal); font-size:.75rem; font-weight:800; text-transform:uppercase; letter-spacing:.05em; }
+.latest-feedback-float video { display:block; width:100%; height:400px; object-fit:contain; background:#142238; }
+.latest-feedback-float > div { display:grid; gap:.2rem; padding:.7rem .9rem .85rem; }
+.latest-feedback-float span { color:var(--muted); font-size:.82rem; }
+.latest-feedback-float a { color:var(--teal); font-size:.82rem; font-weight:800; text-decoration:none; }
+.feedback-float-close { position:absolute; top:.35rem; right:.45rem; z-index:1; width:26px; height:26px; border:0; border-radius:50%; background:#fff; color:var(--ink); cursor:pointer; font-size:1.2rem; line-height:1; }
+@media (max-width:600px) { .review-card video { height:360px; } .latest-feedback-float { right:1rem; bottom:5.5rem; width:min(290px, calc(100vw - 32px)); } .latest-feedback-float video { height:320px; } }
+
+/* Keep all announcement cards and poster areas the same size. */
+.all-posts .announcement-card {
+  width:100%;
+  max-width:none;
+  height:320px;
+  grid-template-columns:260px minmax(0, 1fr);
+}
+.all-posts .announcement-card > img {
+  width:260px;
+  height:290px;
+  max-height:none;
+  object-fit:cover;
+}
+.announcement-copy .whatsapp-group,
+.post-detail-inner .whatsapp-group { margin-right:.65rem; }
+
+@media (max-width:800px) {
+  .all-posts .announcement-card { height:auto; grid-template-columns:1fr; }
+  .all-posts .announcement-card > img { width:100%; height:260px; max-width:none; }
+}
