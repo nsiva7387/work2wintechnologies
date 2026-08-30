@@ -2,7 +2,7 @@ services:
   - type: web
     name: work2win-technologies
     runtime: python
-    buildCommand: pip install -r requirements.txt
+    buildCommand: pip install -r requirements.txt && python manage.py collectstatic --noinput
     startCommand: python manage.py migrate && gunicorn --bind 0.0.0.0:$PORT work2win.wsgi:application
     envVars:
       - key: SECRET_KEY
