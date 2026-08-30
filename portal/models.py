@@ -48,6 +48,7 @@ class StudentFeedback(models.Model):
     video_file = models.FileField(
         "student video",
         upload_to="student_feedback_videos/%Y/%m/",
+        max_length=255,
         blank=True,
         validators=[FileExtensionValidator(["mp4", "webm", "ogg"])],
         help_text="Upload an MP4, WebM, or OGG video.",
