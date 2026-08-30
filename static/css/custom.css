@@ -164,16 +164,16 @@
   .registration-float { left:1rem; bottom:1rem; padding:.7rem .9rem; }
 }
 
-/* Taller players that preserve the entire uploaded video frame. */
+/* Sticky player: the complete video frame stays visible while scrolling. */
 .review-card video { height:460px; max-height:none; aspect-ratio:auto; object-fit:contain; }
-.latest-feedback-float { position:fixed; right:1.25rem; bottom:11.5rem; z-index:7; width:min(330px, calc(100vw - 32px)); overflow:hidden; border:1px solid var(--line); border-radius:14px; background:#fff; box-shadow:0 16px 36px #1422383d; }
+.latest-feedback-float { position:fixed; left:1.25rem; top:5.5rem; z-index:7; width:min(240px, calc(100vw - 32px)); overflow:hidden; border:1px solid var(--line); border-radius:12px; background:#fff; box-shadow:0 16px 36px #1422383d; }
 .latest-feedback-float > p { margin:0; padding:.65rem 2.4rem .65rem .9rem; background:#f3f5f5; color:var(--teal); font-size:.75rem; font-weight:800; text-transform:uppercase; letter-spacing:.05em; }
-.latest-feedback-float video { display:block; width:100%; height:400px; object-fit:contain; background:#142238; }
+.latest-feedback-float video { display:block; width:100%; height:270px; object-fit:contain; background:#142238; }
 .latest-feedback-float > div { display:grid; gap:.2rem; padding:.7rem .9rem .85rem; }
 .latest-feedback-float span { color:var(--muted); font-size:.82rem; }
 .latest-feedback-float a { color:var(--teal); font-size:.82rem; font-weight:800; text-decoration:none; }
 .feedback-float-close { position:absolute; top:.35rem; right:.45rem; z-index:1; width:26px; height:26px; border:0; border-radius:50%; background:#fff; color:var(--ink); cursor:pointer; font-size:1.2rem; line-height:1; }
-@media (max-width:600px) { .review-card video { height:360px; } .latest-feedback-float { right:1rem; bottom:5.5rem; width:min(290px, calc(100vw - 32px)); } .latest-feedback-float video { height:320px; } }
+@media (max-width:600px) { .review-card video { height:360px; } .latest-feedback-float { left:1rem; top:5rem; width:min(210px, calc(100vw - 32px)); } .latest-feedback-float video { height:235px; } }
 
 /* Keep all announcement cards and poster areas the same size. */
 .all-posts .announcement-card {
