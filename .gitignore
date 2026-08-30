@@ -8,3 +8,4 @@ data/
 static/uploads/
 media/
 staticfiles/
+*.sqlite3
